@@ -1,5 +1,5 @@
 /*!
- * jQuery UI Sortable 1.13.3
+ * jQuery UI Sortable 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -10,6 +10,5 @@
  *= require jquery-ui/theme
  */
 .ui-sortable-handle {
-	-ms-touch-action: none;
 	touch-action: none;
 }
