@@ -160,7 +160,7 @@ $.widget( "ui.checkboxradio", [ $.ui.formResetMixin, {
 	_getRadioGroup: function() {
 		var group;
 		var name = this.element[ 0 ].name;
-		var nameSelector = "input[name='" + $.escapeSelector( name ) + "']";
+		var nameSelector = "input[name='" + CSS.escape( name ) + "']";
 
 		if ( !name ) {
 			return $( [] );
@@ -172,7 +172,7 @@ $.widget( "ui.checkboxradio", [ $.ui.formResetMixin, {
 
 			// Not inside a form, check all inputs that also are not inside a form
 			group = $( nameSelector ).filter( function() {
-				return $( this )._form().length === 0;
+				return $( $( this ).prop( "form" ) ).length === 0;
 			} );
 		}
 

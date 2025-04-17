@@ -1,7 +1,6 @@
 //= require jquery-ui/widgets/menu
 //= require jquery-ui/keycode
 //= require jquery-ui/position
-//= require jquery-ui/safe-active-element
 //= require jquery-ui/version
 //= require jquery-ui/widget
 
@@ -34,7 +33,6 @@
 			"./menu",
 			"../keycode",
 			"../position",
-			"../safe-active-element",
 			"../version",
 			"../widget"
 		], factory );
@@ -91,9 +89,9 @@ $.widget( "ui.autocomplete", {
 
 		// Textareas are always multi-line
 		// Inputs are always single-line, even if inside a contentEditable element
-		// IE also treats inputs as contentEditable
-		// All other element types are determined by whether or not they're contentEditable
-		this.isMultiLine = isTextarea || !isInput && this._isContentEditable( this.element );
+		// All other element types are determined by whether they're contentEditable
+		this.isMultiLine = isTextarea ||
+			!isInput && this.element.prop( "contentEditable" ) === "true";
 
 		this.valueMethod = this.element[ isTextarea || isInput ? "val" : "text" ];
 		this.isNewMenu = true;
@@ -157,7 +155,6 @@ $.widget( "ui.autocomplete", {
 
 						// Different browsers have different default behavior for escape
 						// Single press can mean undo or clear
-						// Double press in IE means clear the whole form
 						event.preventDefault();
 					}
 					break;
@@ -226,16 +223,6 @@ $.widget( "ui.autocomplete", {
 				role: null
 			} )
 			.hide()
-
-			// Support: IE 11 only, Edge <= 14
-			// For other browsers, we preventDefault() on the mousedown event
-			// to keep the dropdown from taking focus from the input. This doesn't
-			// work for IE/Edge, causing problems with selection and scrolling (#9638)
-			// Happily, IE and Edge support an "unselectable" attribute that
-			// prevents an element from receiving focus, exactly what we want here.
-			.attr( {
-				"unselectable": "on"
-			} )
 			.menu( "instance" );
 
 		this._addClass( this.menu.element, "ui-autocomplete", "ui-front" );
@@ -248,7 +235,7 @@ $.widget( "ui.autocomplete", {
 			menufocus: function( event, ui ) {
 				var label, item;
 
-				// support: Firefox
+				// Support: Firefox
 				// Prevent accidental activation of menu items in Firefox (#7024 #9118)
 				if ( this.isNewMenu ) {
 					this.isNewMenu = false;
@@ -286,17 +273,9 @@ $.widget( "ui.autocomplete", {
 					previous = this.previous;
 
 				// Only trigger when focus was lost (click on menu)
-				if ( this.element[ 0 ] !== $.ui.safeActiveElement( this.document[ 0 ] ) ) {
+				if ( this.element[ 0 ] !== this.document[ 0 ].activeElement ) {
 					this.element.trigger( "focus" );
 					this.previous = previous;
-
-					// #6109 - IE triggers two focus events and the second
-					// is asynchronous, so we need to reset the previous
-					// term synchronously and asynchronously :-(
-					this._delay( function() {
-						this.previous = previous;
-						this.selectedItem = item;
-					} );
 				}
 
 				if ( false !== this._trigger( "select", event, { item: item } ) ) {
@@ -615,24 +594,6 @@ $.widget( "ui.autocomplete", {
 			// Prevents moving cursor to beginning/end of the text field in some browsers
 			event.preventDefault();
 		}
-	},
-
-	// Support: Chrome <=50
-	// We should be able to just use this.element.prop( "isContentEditable" )
-	// but hidden elements always report false in Chrome.
-	// https://code.google.com/p/chromium/issues/detail?id=313082
-	_isContentEditable: function( element ) {
-		if ( !element.length ) {
-			return false;
-		}
-
-		var editable = element.prop( "contentEditable" );
-
-		if ( editable === "inherit" ) {
-			return this._isContentEditable( element.parent() );
-		}
-
-		return editable === "true";
 	}
 } );
 

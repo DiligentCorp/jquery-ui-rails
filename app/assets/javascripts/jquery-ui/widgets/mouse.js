@@ -1,4 +1,3 @@
-//= require jquery-ui/ie
 //= require jquery-ui/version
 //= require jquery-ui/widget
 
@@ -24,7 +23,6 @@
 		// AMD. Register as an anonymous module.
 		define( [
 			"jquery",
-			"../ie",
 			"../version",
 			"../widget"
 		], factory );
@@ -94,12 +92,10 @@ return $.widget( "ui.mouse", {
 		this._mouseDownEvent = event;
 
 		var that = this,
-			btnIsLeft = ( event.which === 1 ),
-
-			// event.target.nodeName works around a bug in IE 8 with
-			// disabled inputs (#7620)
-			elIsCancel = ( typeof this.options.cancel === "string" && event.target.nodeName ?
-				$( event.target ).closest( this.options.cancel ).length : false );
+			btnIsLeft = event.which === 1,
+			elIsCancel = typeof this.options.cancel === "string" ?
+				$( event.target ).closest( this.options.cancel ).length :
+				false;
 		if ( !btnIsLeft || elIsCancel || !this._mouseCapture( event ) ) {
 			return true;
 		}
@@ -145,28 +141,17 @@ return $.widget( "ui.mouse", {
 	_mouseMove: function( event ) {
 
 		// Only check for mouseups outside the document if you've moved inside the document
-		// at least once. This prevents the firing of mouseup in the case of IE<9, which will
-		// fire a mousemove event if content is placed under the cursor. See #7778
-		// Support: IE <9
-		if ( this._mouseMoved ) {
+		// at least once.
+		if ( this._mouseMoved && !event.which ) {
 
-			// IE mouseup check - mouseup happened when mouse was out of window
-			if ( $.ui.ie && ( !document.documentMode || document.documentMode < 9 ) &&
-					!event.button ) {
+			// Support: Safari <=8 - 9
+			// Safari sets which to 0 if you press any of the following keys
+			// during a drag (#14461)
+			if ( event.originalEvent.altKey || event.originalEvent.ctrlKey ||
+					event.originalEvent.metaKey || event.originalEvent.shiftKey ) {
+				this.ignoreMissingWhich = true;
+			} else if ( !this.ignoreMissingWhich ) {
 				return this._mouseUp( event );
-
-			// Iframe mouseup check - mouseup occurred in another document
-			} else if ( !event.which ) {
-
-				// Support: Safari <=8 - 9
-				// Safari sets which to 0 if you press any of the following keys
-				// during a drag (#14461)
-				if ( event.originalEvent.altKey || event.originalEvent.ctrlKey ||
-						event.originalEvent.metaKey || event.originalEvent.shiftKey ) {
-					this.ignoreMissingWhich = true;
-				} else if ( !this.ignoreMissingWhich ) {
-					return this._mouseUp( event );
-				}
 			}
 		}
 

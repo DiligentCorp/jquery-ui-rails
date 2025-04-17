@@ -10,6 +10,5 @@
  *= require jquery-ui/theme
  */
 .ui-sortable-handle {
-	-ms-touch-action: none;
 	touch-action: none;
 }

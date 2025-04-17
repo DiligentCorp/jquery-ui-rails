@@ -10,6 +10,5 @@
  *= require jquery-ui/theme
  */
 .ui-draggable-handle {
-	-ms-touch-action: none;
 	touch-action: none;
 }

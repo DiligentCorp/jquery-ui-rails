@@ -36,7 +36,7 @@
 "use strict";
 
 var effect;
-if ( $.uiBackCompat !== false ) {
+if ( $.uiBackCompat === true ) {
 	effect = $.effects.define( "transfer", function( options, done ) {
 		$( this ).transfer( options, done );
 	} );

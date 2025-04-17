@@ -1,7 +1,6 @@
 //= require jquery-ui/widgets/button
 //= require jquery-ui/version
 //= require jquery-ui/keycode
-//= require jquery-ui/safe-active-element
 //= require jquery-ui/widget
 
 /*!
@@ -33,7 +32,6 @@
 			"./button",
 			"../version",
 			"../keycode",
-			"../safe-active-element",
 			"../widget"
 		], factory );
 	} else {
@@ -137,11 +135,6 @@ $.widget( "ui.spinner", {
 			this.previous = this.element.val();
 		},
 		blur: function( event ) {
-			if ( this.cancelBlur ) {
-				delete this.cancelBlur;
-				return;
-			}
-
 			this._stop();
 			this._refresh();
 			if ( this.previous !== this.element.val() ) {
@@ -149,7 +142,7 @@ $.widget( "ui.spinner", {
 			}
 		},
 		mousewheel: function( event, delta ) {
-			var activeElement = $.ui.safeActiveElement( this.document[ 0 ] );
+			var activeElement = this.document[ 0 ].activeElement;
 			var isActive = this.element[ 0 ] === activeElement;
 
 			if ( !isActive || !delta ) {
@@ -177,36 +170,19 @@ $.widget( "ui.spinner", {
 			// If the input is focused then this.previous is properly set from
 			// when the input first received focus. If the input is not focused
 			// then we need to set this.previous based on the value before spinning.
-			previous = this.element[ 0 ] === $.ui.safeActiveElement( this.document[ 0 ] ) ?
+			previous = this.element[ 0 ] === this.document[ 0 ].activeElement ?
 				this.previous : this.element.val();
 			function checkFocus() {
-				var isActive = this.element[ 0 ] === $.ui.safeActiveElement( this.document[ 0 ] );
+				var isActive = this.element[ 0 ] === this.document[ 0 ].activeElement;
 				if ( !isActive ) {
 					this.element.trigger( "focus" );
 					this.previous = previous;
-
-					// support: IE
-					// IE sets focus asynchronously, so we need to check if focus
-					// moved off of the input because the user clicked on the button.
-					this._delay( function() {
-						this.previous = previous;
-					} );
 				}
 			}
 
 			// Ensure focus is on (or stays on) the text field
 			event.preventDefault();
 			checkFocus.call( this );
-
-			// Support: IE
-			// IE doesn't prevent moving focus even with event.preventDefault()
-			// so we set a flag to know when we should ignore the blur event
-			// and check (again) if focus moved off of the input.
-			this.cancelBlur = true;
-			this._delay( function() {
-				delete this.cancelBlur;
-				checkFocus.call( this );
-			} );
 
 			if ( this._start( event ) === false ) {
 				return;
@@ -560,7 +536,7 @@ $.widget( "ui.spinner", {
 
 // DEPRECATED
 // TODO: switch return back to widget declaration at top of file when this is removed
-if ( $.uiBackCompat !== false ) {
+if ( $.uiBackCompat === true ) {
 
 	// Backcompat for spinner html extension points
 	$.widget( "ui.spinner", $.ui.spinner, {

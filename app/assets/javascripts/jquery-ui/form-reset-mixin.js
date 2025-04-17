@@ -1,4 +1,3 @@
-//= require jquery-ui/form
 //= require jquery-ui/version
 
 /*!
@@ -23,7 +22,6 @@
 		// AMD. Register as an anonymous module.
 		define( [
 			"jquery",
-			"./form",
 			"./version"
 		], factory );
 	} else {
@@ -48,7 +46,7 @@ return $.ui.formResetMixin = {
 	},
 
 	_bindFormResetHandler: function() {
-		this.form = this.element._form();
+		this.form = $( this.element.prop( "form" ) );
 		if ( !this.form.length ) {
 			return;
 		}
