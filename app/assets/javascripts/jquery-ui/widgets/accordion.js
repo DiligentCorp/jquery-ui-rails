@@ -4,7 +4,7 @@
 //= require jquery-ui/widget
 
 /*!
- * jQuery UI Accordion 1.13.3
+ * jQuery UI Accordion 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -45,7 +45,7 @@
 "use strict";
 
 return $.widget( "ui.accordion", {
-	version: "1.13.3",
+	version: "1.14.1",
 	options: {
 		active: 0,
 		animate: {},

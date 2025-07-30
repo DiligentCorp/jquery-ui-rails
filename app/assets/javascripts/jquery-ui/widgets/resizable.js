@@ -5,7 +5,7 @@
 //= require jquery-ui/widget
 
 /*!
- * jQuery UI Resizable 1.13.3
+ * jQuery UI Resizable 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -45,7 +45,7 @@
 "use strict";
 
 $.widget( "ui.resizable", $.ui.mouse, {
-	version: "1.13.3",
+	version: "1.14.1",
 	widgetEventPrefix: "resize",
 	options: {
 		alsoResize: false,
@@ -1110,7 +1110,7 @@ $.ui.plugin.add( "resizable", "alsoResize", {
 				elSize = that._calculateAdjustedElementDimensions( el );
 
 			el.data( "ui-resizable-alsoresize", {
-				width: parseFloat( el.css( "width" ) ), height: parseFloat( el.css( "height" ) ),
+				width: elSize.width, height: elSize.height,
 				left: parseFloat( el.css( "left" ) ), top: parseFloat( el.css( "top" ) )
 			} );
 		} );

@@ -11,7 +11,7 @@
 //= require jquery-ui/widget
 
 /*!
- * jQuery UI Dialog 1.13.3
+ * jQuery UI Dialog 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -57,7 +57,7 @@
 "use strict";
 
 $.widget( "ui.dialog", {
-	version: "1.13.3",
+	version: "1.14.1",
 	options: {
 		appendTo: "body",
 		autoOpen: true,
@@ -892,18 +892,6 @@ $.widget( "ui.dialog", {
 				if ( !instance._allowInteraction( event ) ) {
 					event.preventDefault();
 					instance._focusTabbable();
-
-					// Support: jQuery >=3.4 <3.7 only
-					// In jQuery 3.4-3.6, there are multiple issues with focus/blur
-					// trigger chains or when triggering is done on a hidden element
-					// at least once.
-					// Trigger focus in a delay in addition if needed to avoid the issues.
-					// See https://github.com/jquery/jquery/issues/4382
-					// See https://github.com/jquery/jquery/issues/4856
-					// See https://github.com/jquery/jquery/issues/4950
-					if ( jqMinor === "3.4." || jqMinor === "3.5." || jqMinor === "3.6." ) {
-						instance._delay( instance._restoreTabbableFocus );
-					}
 				}
 			}.bind( this ) );
 		}

@@ -1,7 +1,7 @@
 //= require jquery-ui/version
 
 /*!
- * jQuery UI Support for jQuery core 1.8.x and newer 1.13.3
+ * jQuery UI Legacy jQuery Core patches 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors

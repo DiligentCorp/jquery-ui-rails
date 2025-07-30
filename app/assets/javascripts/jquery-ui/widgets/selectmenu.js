@@ -8,7 +8,7 @@
 //= require jquery-ui/widget
 
 /*!
- * jQuery UI Selectmenu 1.13.3
+ * jQuery UI Selectmenu 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -53,7 +53,7 @@
 "use strict";
 
 return $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
-	version: "1.13.3",
+	version: "1.14.1",
 	defaultElement: "<select>",
 	options: {
 		appendTo: null,
@@ -412,20 +412,9 @@ return $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 			return;
 		}
 
-		if ( window.getSelection ) {
-			selection = window.getSelection();
-			selection.removeAllRanges();
-			selection.addRange( this.range );
-
-		// Support: IE8
-		} else {
-			this.range.select();
-		}
-
-		// Support: IE
-		// Setting the text selection kills the button focus in IE, but
-		// restoring the focus doesn't kill the selection.
-		this.button.trigger( "focus" );
+		selection = window.getSelection();
+		selection.removeAllRanges();
+		selection.addRange( this.range );
 	},
 
 	_documentClick: {

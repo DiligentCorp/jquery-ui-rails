@@ -1,8 +1,8 @@
 # master
 
-# 7.0.1
+# 8.0.0
 
-* Update to jQuery UI 1.13.3
+* Update to jQuery UI 1.14.1
 
 # 7.0.0
 

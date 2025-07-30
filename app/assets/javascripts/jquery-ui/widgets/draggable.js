@@ -6,7 +6,7 @@
 //= require jquery-ui/widget
 
 /*!
- * jQuery UI Draggable 1.13.3
+ * jQuery UI Draggable 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -45,7 +45,7 @@
 "use strict";
 
 $.widget( "ui.draggable", $.ui.mouse, {
-	version: "1.13.3",
+	version: "1.14.1",
 	widgetEventPrefix: "drag",
 	options: {
 		addClasses: true,

@@ -4,7 +4,7 @@
 //= require jquery-ui/widget
 
 /*!
- * jQuery UI Droppable 1.13.3
+ * jQuery UI Droppable 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -40,7 +40,7 @@
 "use strict";
 
 $.widget( "ui.droppable", {
-	version: "1.13.3",
+	version: "1.14.1",
 	widgetEventPrefix: "drop",
 	options: {
 		accept: "*",

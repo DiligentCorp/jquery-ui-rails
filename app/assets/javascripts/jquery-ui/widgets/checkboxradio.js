@@ -3,7 +3,7 @@
 //= require jquery-ui/widget
 
 /*!
- * jQuery UI Checkboxradio 1.13.3
+ * jQuery UI Checkboxradio 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -42,7 +42,7 @@
 "use strict";
 
 $.widget( "ui.checkboxradio", [ $.ui.formResetMixin, {
-	version: "1.13.3",
+	version: "1.14.1",
 	options: {
 		disabled: null,
 		label: null,

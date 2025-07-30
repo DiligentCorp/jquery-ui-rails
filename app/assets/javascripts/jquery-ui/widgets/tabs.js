@@ -4,7 +4,7 @@
 //= require jquery-ui/widget
 
 /*!
- * jQuery UI Tabs 1.13.3
+ * jQuery UI Tabs 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -43,7 +43,7 @@
 "use strict";
 
 $.widget( "ui.tabs", {
-	version: "1.13.3",
+	version: "1.14.1",
 	delay: 300,
 	options: {
 		active: null,
@@ -854,22 +854,10 @@ $.widget( "ui.tabs", {
 					panel.html( response );
 					that._trigger( "load", event, eventData );
 
-					// support: jQuery <1.8
-					// https://bugs.jquery.com/ticket/11778
-					setTimeout( function() {
-						panel.html( response );
-						that._trigger( "load", event, eventData );
-
-						complete( jqXHR, status );
-					}, 1 );
+					complete( jqXHR, status );
 				} )
 				.fail( function( jqXHR, status ) {
-
-					// support: jQuery <1.8
-					// https://bugs.jquery.com/ticket/11778
-					setTimeout( function() {
-						complete( jqXHR, status );
-					}, 1 );
+					complete( jqXHR, status );
 				} );
 		}
 	},

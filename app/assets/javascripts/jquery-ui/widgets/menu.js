@@ -5,7 +5,7 @@
 //= require jquery-ui/widget
 
 /*!
- * jQuery UI Menu 1.13.3
+ * jQuery UI Menu 1.14.1
  * https://jqueryui.com
  *
  * Copyright OpenJS Foundation and other contributors
@@ -45,7 +45,7 @@
 "use strict";
 
 return $.widget( "ui.menu", {
-	version: "1.13.3",
+	version: "1.14.1",
 	defaultElement: "<ul>",
 	delay: 300,
 	options: {
