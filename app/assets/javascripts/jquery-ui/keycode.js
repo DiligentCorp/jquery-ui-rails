@@ -1,18 +1,18 @@
 //= require jquery-ui/version
 
 /*!
- * jQuery UI Keycode 1.13.3
- * https://jqueryui.com
+ * jQuery UI Keycode 1.13.0
+ * http://jqueryui.com
  *
- * Copyright OpenJS Foundation and other contributors
+ * Copyright jQuery Foundation and other contributors
  * Released under the MIT license.
- * https://jquery.org/license
+ * http://jquery.org/license
  */
 
 //>>label: Keycode
 //>>group: Core
 //>>description: Provide keycodes as keynames
-//>>docs: https://api.jqueryui.com/jQuery.ui.keyCode/
+//>>docs: http://api.jqueryui.com/jQuery.ui.keyCode/
 
 ( function( factory ) {
 	"use strict";

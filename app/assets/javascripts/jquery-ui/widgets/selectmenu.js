@@ -8,12 +8,12 @@
 //= require jquery-ui/widget
 
 /*!
- * jQuery UI Selectmenu 1.13.3
- * https://jqueryui.com
+ * jQuery UI Selectmenu 1.13.0
+ * http://jqueryui.com
  *
- * Copyright OpenJS Foundation and other contributors
+ * Copyright jQuery Foundation and other contributors
  * Released under the MIT license.
- * https://jquery.org/license
+ * http://jquery.org/license
  */
 
 //>>label: Selectmenu
@@ -21,8 +21,8 @@
 /* eslint-disable max-len */
 //>>description: Duplicates and extends the functionality of a native HTML select element, allowing it to be customizable in behavior and appearance far beyond the limitations of a native select.
 /* eslint-enable max-len */
-//>>docs: https://api.jqueryui.com/selectmenu/
-//>>demos: https://jqueryui.com/selectmenu/
+//>>docs: http://api.jqueryui.com/selectmenu/
+//>>demos: http://jqueryui.com/selectmenu/
 //>>css.structure: ../../themes/base/core.css
 //>>css.structure: ../../themes/base/selectmenu.css, ../../themes/base/button.css
 //>>css.theme: ../../themes/base/theme.css
@@ -53,7 +53,7 @@
 "use strict";
 
 return $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
-	version: "1.13.3",
+	version: "1.13.0",
 	defaultElement: "<select>",
 	options: {
 		appendTo: null,
@@ -363,12 +363,7 @@ return $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 		if ( item.disabled ) {
 			this._addClass( li, null, "ui-state-disabled" );
 		}
-
-		if ( item.hidden ) {
-			li.prop( "hidden", true );
-		} else {
-			this._setText( wrapper, item.label );
-		}
+		this._setText( wrapper, item.label );
 
 		return li.append( wrapper ).appendTo( ul );
 	},
@@ -431,7 +426,7 @@ return $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 		// Support: IE
 		// Setting the text selection kills the button focus in IE, but
 		// restoring the focus doesn't kill the selection.
-		this.button.trigger( "focus" );
+		this.button.focus();
 	},
 
 	_documentClick: {
@@ -672,6 +667,10 @@ return $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 		var that = this,
 			data = [];
 		options.each( function( index, item ) {
+			if ( item.hidden ) {
+				return;
+			}
+
 			data.push( that._parseOption( $( item ), index ) );
 		} );
 		this.items = data;
@@ -685,7 +684,6 @@ return $.widget( "ui.selectmenu", [ $.ui.formResetMixin, {
 			index: index,
 			value: option.val(),
 			label: option.text(),
-			hidden: optgroup.prop( "hidden" ) || option.prop( "hidden" ),
 			optgroup: optgroup.attr( "label" ) || "",
 			disabled: optgroup.prop( "disabled" ) || option.prop( "disabled" )
 		};

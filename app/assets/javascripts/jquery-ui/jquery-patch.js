@@ -1,12 +1,12 @@
 //= require jquery-ui/version
 
 /*!
- * jQuery UI Support for jQuery core 1.8.x and newer 1.13.3
- * https://jqueryui.com
+ * jQuery UI Support for jQuery core 1.8.x and newer 1.13.0
+ * http://jqueryui.com
  *
- * Copyright OpenJS Foundation and other contributors
+ * Copyright jQuery Foundation and other contributors
  * Released under the MIT license.
- * https://jquery.org/license
+ * http://jquery.org/license
  *
  */
 

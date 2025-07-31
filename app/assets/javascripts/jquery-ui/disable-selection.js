@@ -1,18 +1,18 @@
 //= require jquery-ui/version
 
 /*!
- * jQuery UI Disable Selection 1.13.3
- * https://jqueryui.com
+ * jQuery UI Disable Selection 1.13.0
+ * http://jqueryui.com
  *
- * Copyright OpenJS Foundation and other contributors
+ * Copyright jQuery Foundation and other contributors
  * Released under the MIT license.
- * https://jquery.org/license
+ * http://jquery.org/license
  */
 
 //>>label: disableSelection
 //>>group: Core
 //>>description: Disable selection of text content within the set of matched elements.
-//>>docs: https://api.jqueryui.com/disableSelection/
+//>>docs: http://api.jqueryui.com/disableSelection/
 
 // This file is deprecated
 ( function( factory ) {
